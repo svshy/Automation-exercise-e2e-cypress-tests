@@ -1,23 +1,31 @@
 /// <reference types="cypress"/>
 
+import LoginPage from "./PageObject/LoginPage";
+import HomePage from "./PageObject/HomePage";
+
 describe(`Login user with correct email and password`, () => {
-  //pobranie jsona z fixture z danymi do logowania
+  //get corrrect login data in json from fixtures
   beforeEach(function () {
     cy.fixture("correctLoginData").then((data) => {
       this.loginData = data;
     });
   });
   it(`user should log in`, function () {
-    cy.visit(`/`);
-    //sprawdzenie czy tytuł strony jest zgodny
-    cy.title().should("eq", "Automation Exercise");
-    cy.get(`a[href*="/login"]`).click();
-    cy.get(`.login-form`)
+    //open login page
+    cy.visit(`/login`);
+    //verify login page title
+    cy.title().should("eq", "Automation Exercise - Signup / Login");
+    //get login form div and verify form heading
+    LoginPage.getLoginForm()
       .should(`contain`, `Login to your account`)
       .should(`be.visible`);
-    //wykorzystanie custom commands, funkcja logowania
-    cy.login(this.loginData.email, this.loginData.password);
-    cy.get(`ul.navbar-nav`).should(
+    //get POM elements and type data from loginData
+    LoginPage.getLoginInput().clear().type(this.loginData.email);
+    LoginPage.getPasswordInput().clear().type(this.loginData.password);
+    //get login button and click
+    LoginPage.getLoginBtn().click();
+    //verify that "Logged in as ${this.loginData.username} is visible in the navigation bar"
+    HomePage.getNavbarLinks().should(
       `contain`,
       `Logged in as ${this.loginData.username}`
     );
