@@ -9,6 +9,28 @@
 // ***********************************************
 //
 //
+import { faker } from "@faker-js/faker";
+
+Cypress.Commands.add("generateRegisterFixture", () => {
+  cy.writeFile("cypress/fixtures/registerData.json", {
+    userName: `${faker.internet.userName()}`,
+    email: `${faker.internet.email()}`,
+    password: `${faker.internet.password()}`,
+    dayOfBirth: `${faker.datatype.number({ min: 1, max: 27 })}`,
+    monthOfBirth: `${faker.date.month()}`,
+    yearOfBirth: `${faker.datatype.number({ min: 1950, max: 2012 })}`,
+    firstName: `${faker.name.firstName()}`,
+    lastName: `${faker.name.lastName()}`,
+    company: `${faker.company.companyName()}`,
+    addressFirstLine: `${faker.address.streetName()}`,
+    addressSecondLine: `${faker.address.secondaryAddress()}`,
+    state: `${faker.address.state()}`,
+    city: `${faker.address.city()}`,
+    zipcode: `${faker.address.zipCode()}`,
+    phoneNumber: `${faker.phone.number()}`,
+  });
+});
+
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //

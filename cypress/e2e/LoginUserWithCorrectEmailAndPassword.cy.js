@@ -1,6 +1,6 @@
 /// <reference types="cypress"/>
 
-import LoginPage from "./PageObject/LoginPage";
+import LoginPage from "./PageObject/LoginAndRegisterPage";
 import HomePage from "./PageObject/HomePage";
 
 describe(`Login user with correct email and password`, () => {
@@ -21,7 +21,7 @@ describe(`Login user with correct email and password`, () => {
       .should(`be.visible`);
     //get POM elements and type data from loginData
     LoginPage.getLoginInput().clear().type(this.loginData.email);
-    LoginPage.getPasswordInput().clear().type(this.loginData.password);
+    LoginPage.getLoginPasswordInput().clear().type(this.loginData.password);
     //get login button and click
     LoginPage.getLoginBtn().click();
     //verify that "Logged in as ${this.loginData.username} is visible in the navigation bar"
