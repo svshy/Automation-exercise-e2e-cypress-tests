@@ -1,4 +1,4 @@
 # dependencies
 node_modules
-cypress/fixtures/
+cypress/fixtures/registerData.json
 cypress/fixtures/correctLoginData.json
