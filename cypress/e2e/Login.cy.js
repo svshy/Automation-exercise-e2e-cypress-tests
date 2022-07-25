@@ -14,7 +14,7 @@ describe(`User Login`, () => {
       .should(`contain`, `Login to your account`)
       .should(`be.visible`);
   });
-  it(`User should log in`, () => {
+  it(`User should log in and log out`, () => {
     //use json from fixtures to use correct credentials
     cy.fixture("correctLoginData").then((data) => {
       //login function from commands.js
@@ -25,6 +25,8 @@ describe(`User Login`, () => {
         `Logged in as ${data.username}`
       );
     });
+    HomePage.getLogoutLink().click();
+    cy.url().should("equal", `${Cypress.config("baseUrl")}login`);
   });
 
   it(`User shouldn't log in`, function () {
