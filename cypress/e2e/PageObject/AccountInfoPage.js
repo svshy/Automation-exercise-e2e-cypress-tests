@@ -3,6 +3,14 @@ class AccountInfoPage {
     return cy.get(`[name="title"]`);
   }
 
+  getName() {
+    return cy.get(`[data-qa="name"]`);
+  }
+
+  getEmail() {
+    return cy.get(`[data-qa="email"]`);
+  }
+
   getRegisterPasswordInput() {
     return cy.get(`#password`);
   }

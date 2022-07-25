@@ -10,6 +10,7 @@
 //
 //
 import { faker } from "@faker-js/faker";
+import LoginPage from "../e2e/PageObject/LoginAndRegisterPage";
 
 Cypress.Commands.add("generateRegisterFixture", () => {
   cy.writeFile("cypress/fixtures/registerData.json", {
@@ -31,9 +32,14 @@ Cypress.Commands.add("generateRegisterFixture", () => {
   });
 });
 
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
+Cypress.Commands.add("login", (email, password) => {
+  //get POM elements and type data from loginData
+  LoginPage.getLoginInput().clear().type(email);
+  LoginPage.getLoginPasswordInput().clear().type(password);
+  //get login button and click
+  LoginPage.getLoginBtn().click();
+});
+
 //
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })

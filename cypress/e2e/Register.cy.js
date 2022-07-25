@@ -6,14 +6,13 @@ import AccountCreated from "./PageObject/AccountCreatedPage";
 import HomePage from "./PageObject/HomePage";
 
 describe(`User Registration`, () => {
-  beforeEach(function () {
+  before(function () {
     cy.generateRegisterFixture();
     cy.fixture("registerData").then((data) => {
       this.registerData = data;
     });
   });
   it(`Should register new user`, function () {
-    let array = [];
     //open register page
     cy.visit(`/login`);
     //verify register page title
@@ -30,6 +29,14 @@ describe(`User Registration`, () => {
         cy.wrap(item).check();
       });
     });
+    //verify that username has been retrieved and is equal to the generated username in Faker.js
+    AccountInfo.getName()
+      .invoke("attr", "value")
+      .should("eq", this.registerData.userName);
+    //verify that email has been retrieved and is equal to the generated email in Faker.js
+    AccountInfo.getEmail()
+      .invoke("attr", "value")
+      .should("eq", this.registerData.email);
     AccountInfo.getRegisterPasswordInput().type(this.registerData.password);
     AccountInfo.getDayOfBirth().select(this.registerData.dayOfBirth);
     AccountInfo.getMonthOfBirth().select(this.registerData.monthOfBirth);
