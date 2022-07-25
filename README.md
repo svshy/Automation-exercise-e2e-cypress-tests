@@ -7,9 +7,8 @@ Test Cases - https://www.automationexercise.com/test_cases
 # How to run the tests
 
 1. Clone the repository
-2. Create account on https://www.automationexercise.com/ and save your login data in `correctLoginData.json` in `fixtures` folder
-3. Run `npm install`
-4. Run `npm run cy:run`
+2. Run `npm install`
+3. Run `npm run cy:run`
 
 # Using Faker (https://fakerjs.dev/) to generate the data needed for registration
 
