@@ -12,7 +12,7 @@ describe(`User Registration`, () => {
       this.registerData = data;
     });
   });
-  it(`Should register new user`, function () {
+  it(`Should register new user with email that is not used `, function () {
     //open register page
     cy.visit(`/login`);
     //verify register page title
@@ -20,9 +20,7 @@ describe(`User Registration`, () => {
     RegisterPage.getRegisterForm()
       .should(`contain`, `New User Signup!`)
       .should(`be.visible`);
-    RegisterPage.getRegisterName().type(this.registerData.userName);
-    RegisterPage.getRegisterEmail().type(this.registerData.email);
-    RegisterPage.getRegisterBtn().click();
+    cy.registerUser(this.registerData.userName, this.registerData.email);
     //check all titles
     AccountInfo.getGenderTitles().then((element) => {
       cy.wrap(element).each((item) => {
@@ -69,5 +67,27 @@ describe(`User Registration`, () => {
       `contain`,
       `Logged in as ${this.registerData.userName}`
     );
+  });
+  it(`Shouldn't register new user with email that is exist`, function () {
+    //open register page
+    cy.visit(`/login`);
+    //verify register page title
+    cy.title().should("eq", "Automation Exercise - Signup / Login");
+    RegisterPage.getRegisterForm()
+      .should(`contain`, `New User Signup!`)
+      .should(`be.visible`);
+    //use registered email from correctLoginData.json
+    cy.fixture("correctLoginData").then((data) => {
+      this.registerData = data;
+      //generate username
+      cy.generateUsername().then((username) => {
+        //register new user with generated username and exist in database email
+        cy.registerUser(username, this.registerData.email);
+      });
+    });
+    //verify that "Email Address already exist!" is visible in the register form
+    RegisterPage.getRegisterForm()
+      .should("contain", "Email Address already exist!")
+      .and("be.visible");
   });
 });

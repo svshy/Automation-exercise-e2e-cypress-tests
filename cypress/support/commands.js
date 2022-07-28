@@ -11,6 +11,7 @@
 //
 import { faker } from "@faker-js/faker";
 import LoginPage from "../e2e/PageObject/LoginAndRegisterPage";
+import RegisterPage from "../e2e/PageObject/LoginAndRegisterPage";
 
 Cypress.Commands.add("generateRegisterFixture", () => {
   cy.writeFile("cypress/fixtures/registerData.json", {
@@ -38,6 +39,16 @@ Cypress.Commands.add("login", (email, password) => {
   LoginPage.getLoginPasswordInput().clear().type(password);
   //get login button and click
   LoginPage.getLoginBtn().click();
+});
+
+Cypress.Commands.add("registerUser", (username, email) => {
+  RegisterPage.getRegisterName().type(username);
+  RegisterPage.getRegisterEmail().type(email);
+  RegisterPage.getRegisterBtn().click();
+});
+
+Cypress.Commands.add("generateUsername", () => {
+  return faker.internet.userName();
 });
 
 //

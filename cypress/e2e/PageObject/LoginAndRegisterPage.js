@@ -30,10 +30,6 @@ class LoginAndRegisterPage {
   getRegisterBtn() {
     return cy.get(`[data-qa="signup-button"]`);
   }
-
-  getRegisterBtn() {
-    return cy.get(`[data-qa="signup-button"]`);
-  }
 }
 
 export default new LoginAndRegisterPage();
