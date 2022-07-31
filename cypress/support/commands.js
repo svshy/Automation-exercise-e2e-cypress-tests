@@ -51,6 +51,10 @@ Cypress.Commands.add("generateUsername", () => {
   return faker.internet.userName();
 });
 
+Cypress.Commands.add("verifyTitle", (title) => {
+  cy.title().should("eq", title);
+});
+
 //
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })

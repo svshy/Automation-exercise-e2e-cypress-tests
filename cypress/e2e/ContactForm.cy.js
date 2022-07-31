@@ -10,7 +10,7 @@ describe(`Contact Form`, () => {
       .should(`contain`, `Contact us`)
       .should(`be.visible`)
       .click();
-    cy.title().should("eq", "Automation Exercise - Contact Us");
+    cy.verifyTitle("Automation Exercise - Contact Us");
     ContactPage.getContactForm()
       .should(`contain`, `Get In Touch`)
       .should(`be.visible`);
@@ -36,6 +36,6 @@ describe(`Contact Form`, () => {
       )
       .should("be.visible");
     ContactPage.getRedirectBtn().click();
-    cy.title().should("eq", "Automation Exercise");
+    cy.verifyTitle("Automation Exercise");
   });
 });

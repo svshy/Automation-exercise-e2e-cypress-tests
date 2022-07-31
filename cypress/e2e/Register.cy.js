@@ -16,7 +16,7 @@ describe(`User Registration`, () => {
     //open register page
     cy.visit(`/login`);
     //verify register page title
-    cy.title().should("eq", "Automation Exercise - Signup / Login");
+    cy.verifyTitle("Automation Exercise - Signup / Login");
     RegisterPage.getRegisterForm()
       .should(`contain`, `New User Signup!`)
       .should(`be.visible`);
@@ -72,7 +72,7 @@ describe(`User Registration`, () => {
     //open register page
     cy.visit(`/login`);
     //verify register page title
-    cy.title().should("eq", "Automation Exercise - Signup / Login");
+    cy.verifyTitle("Automation Exercise - Signup / Login");
     RegisterPage.getRegisterForm()
       .should(`contain`, `New User Signup!`)
       .should(`be.visible`);

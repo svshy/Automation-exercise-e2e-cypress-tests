@@ -8,7 +8,7 @@ describe(`User Login`, () => {
     //open login page
     cy.visit(`/login`);
     //verify login page title
-    cy.title().should("eq", "Automation Exercise - Signup / Login");
+    cy.verifyTitle("Automation Exercise - Signup / Login");
     //get login form div and verify form heading
     LoginPage.getLoginForm()
       .should(`contain`, `Login to your account`)
