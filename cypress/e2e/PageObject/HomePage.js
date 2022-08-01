@@ -13,6 +13,10 @@ class HomePage {
   getTestCasesLink() {
     return cy.get('li a[href="/test_cases"]');
   }
+
+  getProductsLink() {
+    return cy.get('a[href="/products"]');
+  }
 }
 
 export default new HomePage();
