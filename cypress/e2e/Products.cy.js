@@ -14,8 +14,8 @@ describe(`Products`, () => {
     ProductsPage.getProductsList().should("have.length", 34).and(`be.visible`);
     ProductsPage.getProductsList()
       .first()
-      .then((product) => {
-        cy.wrap(product).find(".choose a").click();
+      .then(() => {
+        ProductsPage.getViewProductBtn().first().click();
       });
     cy.verifyTitle("Automation Exercise - Product Details");
     SingleProductPage.getProductInformation().should("be.visible");
