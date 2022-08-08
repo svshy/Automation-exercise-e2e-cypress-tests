@@ -51,6 +51,10 @@ Cypress.Commands.add("generateUsername", () => {
   return faker.internet.userName();
 });
 
+Cypress.Commands.add("generateEmail", () => {
+  return faker.internet.email();
+});
+
 Cypress.Commands.add("verifyTitle", (title) => {
   cy.title().should("eq", title);
 });
