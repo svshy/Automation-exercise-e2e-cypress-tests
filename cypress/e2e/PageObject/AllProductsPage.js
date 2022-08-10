@@ -5,7 +5,9 @@ class AllProductsPage {
   getProductsList() {
     return cy.get(".single-products");
   }
-  getProductTitle
+  getProductPrice() {
+    return cy.get(".productinfo h2");
+  }
   getViewProductBtn() {
     return cy.get(".choose a");
   }
@@ -14,6 +16,16 @@ class AllProductsPage {
   }
   getSubmitSearch() {
     return cy.get("#submit_search");
+  }
+  getOverlayAddToCartBtn(productNumber) {
+    return cy.get(`.overlay-content > a[data-product-id="${productNumber}"]`);
+  }
+
+  getContinueShoppingBtn() {
+    return cy.get(".btn-success").contains("Continue Shopping");
+  }
+  getModalViewCartBtn() {
+    return cy.get(`.modal-content a[href="/view_cart"]`);
   }
 }
 

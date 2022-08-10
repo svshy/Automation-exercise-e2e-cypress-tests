@@ -34,6 +34,10 @@ class HomePage {
   getFooter() {
     return cy.get("#footer");
   }
+
+  getFooter() {
+    return cy.get("#footer");
+  }
 }
 
 export default new HomePage();
