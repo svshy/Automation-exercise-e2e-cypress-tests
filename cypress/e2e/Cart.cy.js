@@ -1,15 +1,16 @@
 /// <reference types="cypress"/>
 
 import HomePage from "./PageObject/HomePage";
-import ProductPage from "./PageObject/AllProductsPage";
+import ProductsPage from "./PageObject/AllProductsPage";
 import CartPage from "./PageObject/CartPage";
+import SingleProductPage from "./PageObject/SingleProductPage";
 
 describe(`Products Cart`, () => {
   it(`Add Products in Cart`, () => {
     let productsPrices = [];
     cy.visit("/");
     HomePage.getProductsLink().click();
-    ProductPage.getProductsList().each((product, index) => {
+    ProductsPage.getProductsList().each((product, index) => {
       if (index + 1 <= 2) {
         cy.wrap(product).then(() => {
           cy.wrap(product)
@@ -19,12 +20,12 @@ describe(`Products Cart`, () => {
               productsPrices.push(text);
             });
 
-          ProductPage.getOverlayAddToCartBtn(index + 1).click({
+          ProductsPage.getOverlayAddToCartBtn(index + 1).click({
             force: true,
           });
           if (index + 1 !== 2) {
-            ProductPage.getContinueShoppingBtn().click();
-          } else ProductPage.getModalViewCartBtn().click();
+            ProductsPage.getContinueShoppingBtn().click();
+          } else ProductsPage.getModalViewCartBtn().click();
         });
       } else return false;
     });
@@ -41,5 +42,37 @@ describe(`Products Cart`, () => {
           .should("contain", productsPrices[index]);
       });
   });
-  it(`Add Product in Cart and verify quantity equal to 4`, () => {});
+  it(`Add Product in Cart and verify quantity equal to 4`, () => {
+    let product = "";
+    const quantity = 4;
+    cy.visit("/");
+    HomePage.getProductsLink().click();
+    ProductsPage.getProductsList()
+      .first()
+      .then(() => {
+        ProductsPage.getViewProductBtn().first().click();
+      });
+    SingleProductPage.getProductInformation().should("be.visible");
+    SingleProductPage.getProductName()
+      .invoke("text")
+      .then((text) => {
+        product = text;
+      });
+    SingleProductPage.getProductQuantity().clear().type(quantity);
+    SingleProductPage.getAddToCartBtn().click();
+    SingleProductPage.getModalViewCartBtn().click();
+    CartPage.getCartTable().find("tbody tr").should("have.length", 1);
+    CartPage.getCartTable()
+      .find(".cart_description a")
+      .invoke("text")
+      .then((text) => {
+        cy.wrap(text).should("contain", product);
+      });
+    CartPage.getCartTable()
+      .find(".cart_quantity button")
+      .invoke("text")
+      .then((text) => {
+        cy.wrap(text).should("contain", quantity);
+      });
+  });
 });

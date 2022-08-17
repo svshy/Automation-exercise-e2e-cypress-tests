@@ -20,6 +20,15 @@ class SingleProductPage {
   getProductBrand() {
     return cy.get(".product-information p").contains("Brand:");
   }
+  getProductQuantity() {
+    return cy.get("#quantity");
+  }
+  getAddToCartBtn() {
+    return cy.get(".cart");
+  }
+  getModalViewCartBtn() {
+    return cy.get(`.modal-content a[href="/view_cart"]`);
+  }
 }
 
 export default new SingleProductPage();
