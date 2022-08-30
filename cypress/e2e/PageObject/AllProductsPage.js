@@ -20,7 +20,9 @@ class AllProductsPage {
   getOverlayAddToCartBtn(productNumber) {
     return cy.get(`.overlay-content > a[data-product-id="${productNumber}"]`);
   }
-
+  getAddToCartBtn() {
+    return cy.get(`.productinfo > a.add-to-cart`);
+  }
   getContinueShoppingBtn() {
     return cy.get(".btn-success").contains("Continue Shopping");
   }

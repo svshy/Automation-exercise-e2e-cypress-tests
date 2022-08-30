@@ -30,6 +30,10 @@ Cypress.Commands.add("generateRegisterFixture", () => {
     city: `${faker.address.city()}`,
     zipcode: `${faker.address.zipCode()}`,
     phoneNumber: `${faker.phone.number()}`,
+    cardNumber: `${faker.finance.creditCardNumber()}`,
+    cvvCardNumber: `${faker.finance.creditCardCVV()}`,
+    expirationMonth: `${faker.datatype.number({ min: 1, max: 12 })}`,
+    expirationYear: `${faker.datatype.number({ min: 2022, max: 2040 })}`,
   });
 });
 
