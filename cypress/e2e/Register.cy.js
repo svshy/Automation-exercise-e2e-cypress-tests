@@ -20,45 +20,7 @@ describe(`User Registration`, () => {
     RegisterPage.getRegisterForm()
       .should(`contain`, `New User Signup!`)
       .should(`be.visible`);
-    cy.registerUser(this.registerData.userName, this.registerData.email);
-    //check all titles
-    AccountInfo.getGenderTitles().then((element) => {
-      cy.wrap(element).each((item) => {
-        cy.wrap(item).check();
-      });
-    });
-    //verify that username has been retrieved and is equal to the generated username in Faker.js
-    AccountInfo.getName()
-      .invoke("attr", "value")
-      .should("eq", this.registerData.userName);
-    //verify that email has been retrieved and is equal to the generated email in Faker.js
-    AccountInfo.getEmail()
-      .invoke("attr", "value")
-      .should("eq", this.registerData.email);
-    AccountInfo.getRegisterPasswordInput().type(this.registerData.password);
-    AccountInfo.getDayOfBirth().select(this.registerData.dayOfBirth);
-    AccountInfo.getMonthOfBirth().select(this.registerData.monthOfBirth);
-    AccountInfo.getYearOfBirth().select(this.registerData.yearOfBirth);
-    AccountInfo.getNewsletterCheckbox().check();
-    AccountInfo.getMailOffers().check();
-    AccountInfo.getFirstName().type(this.registerData.firstName);
-    AccountInfo.getLastName().type(this.registerData.lastName);
-    AccountInfo.getCompany().type(this.registerData.company);
-    AccountInfo.getFirstLineAdress().type(this.registerData.addressFirstLine);
-    AccountInfo.getSecondLineAdress().type(this.registerData.addressSecondLine);
-    //check all countries
-    AccountInfo.getCountry().then((select) => {
-      cy.wrap(select)
-        .find(`option`)
-        .each((opcja) => {
-          cy.wrap(select).select(opcja.text());
-        });
-    });
-    AccountInfo.getState().type(this.registerData.state);
-    AccountInfo.getCity().type(this.registerData.city);
-    AccountInfo.getZipcode().type(this.registerData.zipcode);
-    AccountInfo.getMobileNumber().type(this.registerData.phoneNumber);
-    AccountInfo.getCreateAccountBtn().click();
+    cy.registerUser(this.registerData);
     AccountCreated.getAccountCreatedTitle()
       .should("contain", `Account Created!`)
       .should(`be.visible`);
@@ -82,7 +44,7 @@ describe(`User Registration`, () => {
       //generate username
       cy.generateUsername().then((username) => {
         //register new user with generated username and exist in database email
-        cy.registerUser(username, this.registerData.email);
+        cy.registerUserWithExistEmail(username, this.registerData.email);
       });
     });
     //verify that "Email Address already exist!" is visible in the register form

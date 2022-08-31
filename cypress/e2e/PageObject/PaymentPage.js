@@ -20,6 +20,9 @@ class PaymentPage {
   getSuccessMessage() {
     return cy.get(`h2[data-qa="order-placed"] + p`);
   }
+  getContinueBtn() {
+    return cy.get(`[data-qa="continue-button"]`);
+  }
 }
 
 export default new PaymentPage();
