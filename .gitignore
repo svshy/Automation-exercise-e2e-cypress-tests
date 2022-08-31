@@ -1,3 +1,4 @@
 # dependencies
 node_modules
 cypress/fixtures/registerData.json
+cypress/screenshots
