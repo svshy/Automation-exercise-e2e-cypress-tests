@@ -134,3 +134,68 @@ describe(`Place Order`, () => {
     cy.verifyTitle("Automation Exercise");
   });
 });
+
+//seperate "describe" to use a different beforeEach hook or not to use any. Alternative solution is to use Cypress.currentTest.title and switch in beforeEach hook
+describe(`Place Order: Login before Checkout`, () => {
+  before(function () {
+    cy.readFile("cypress/fixtures/correctLoginData.json").then((data) => {
+      this.loginData = data;
+    });
+    cy.visit(`/login`);
+    cy.verifyTitle("Automation Exercise - Signup / Login");
+    RegisterPage.getLoginForm()
+      .should(`contain`, `Login to your account`)
+      .should(`be.visible`);
+  });
+  it(`Place Order: Login before Checkout`, function () {
+    cy.login(this.loginData.email, this.loginData.password);
+    HomePage.getNavbarLinks().should(
+      `contain`,
+      `Logged in as ${this.loginData.username}`
+    );
+
+    HomePage.getProductsLink().click();
+    cy.verifyTitle("Automation Exercise - All Products");
+    ProductsPage.getProductsList()
+      .first()
+      .then(() => {
+        ProductsPage.getAddToCartBtn().first().click();
+      });
+    ProductsPage.getModalViewCartBtn().click();
+    cy.verifyTitle("Automation Exercise - Checkout");
+    CartPage.getCheckoutBtn().click();
+    CheckoutPage.getFullName().contains(
+      `${this.loginData.firstName} ${this.loginData.lastName}`
+    );
+    CheckoutPage.getCompany().contains(`${this.loginData.company}`);
+    CheckoutPage.getFirstLineAddress().contains(
+      `${this.loginData.addressFirstLine}`
+    );
+    CheckoutPage.getSecondLineAddress().contains(
+      `${this.loginData.city} ${this.loginData.state} ${this.loginData.zipcode}`
+    );
+    CheckoutPage.getCommentInput()
+      .clear()
+      .type(
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque quas quisquam, officiis sapiente voluptatem aut suscipit a optio sed dolores repellat hic autem dicta quia neque quidem ex quo deserunt."
+      );
+    CheckoutPage.getPlaceOrderBtn().click();
+    PaymentPage.getNameOnCard()
+      .clear()
+      .type(`${this.loginData.firstName} ${this.loginData.lastName}`);
+    PaymentPage.getCardNumber().clear().type(`${this.loginData.cardNumber}`);
+    PaymentPage.getCardCvc().clear().type(`${this.loginData.cvvCardNumber}`);
+    PaymentPage.getExpirationMonth()
+      .clear()
+      .type(`${this.loginData.expirationMonth}`);
+    PaymentPage.getExpirationYear()
+      .clear()
+      .type(`${this.loginData.expirationYear}`);
+    PaymentPage.getPayBtn().click();
+    PaymentPage.getSuccessMessage().contains(
+      `Congratulations! Your order has been confirmed!`
+    );
+    PaymentPage.getContinueBtn().click();
+    cy.verifyTitle("Automation Exercise");
+  });
+});
