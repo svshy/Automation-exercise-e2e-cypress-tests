@@ -75,4 +75,20 @@ describe(`Products Cart`, () => {
         cy.wrap(text).should("contain", quantity);
       });
   });
+  it(`Remove all products From Cart`, () => {
+    cy.visit(`/`);
+    cy.verifyTitle("Automation Exercise");
+    HomePage.getProductsLink().click();
+    cy.verifyTitle("Automation Exercise - All Products");
+    ProductsPage.getProductsList()
+      .first()
+      .then(() => {
+        ProductsPage.getAddToCartBtn().first().click();
+      });
+    ProductsPage.getModalViewCartBtn().click();
+    cy.verifyTitle("Automation Exercise - Checkout");
+    CartPage.getCartTable().find("tbody tr").should("have.length", 1);
+    CartPage.getCartTable().find(".cart_quantity_delete").click();
+    CartPage.getEmptyCartMsg().should("contain", "Cart is empty!");
+  });
 });

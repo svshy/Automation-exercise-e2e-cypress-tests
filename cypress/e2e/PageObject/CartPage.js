@@ -8,6 +8,9 @@ class CartPage {
   getModalCheckoutRegisterBtn() {
     return cy.get(`.modal-content a[href="/login"]`);
   }
+  getEmptyCartMsg() {
+    return cy.get(`#empty_cart`);
+  }
 }
 
 export default new CartPage();
