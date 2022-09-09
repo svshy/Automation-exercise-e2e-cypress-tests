@@ -1,5 +1,21 @@
 {
-  "email": "yatoxo6724@runfons.com",
-  "password": "testHaslo123",
-  "username": "yatoxo6724"
+  "username": "Alexandro16",
+  "email": "Betty_Upton@gmail.com",
+  "password": "X5No2kjXp0q29nC",
+  "dayOfBirth": "6",
+  "monthOfBirth": "October",
+  "yearOfBirth": "1980",
+  "firstName": "Randy",
+  "lastName": "Hessel",
+  "company": "Murphy - Bernhard",
+  "addressFirstLine": "Morissette Island",
+  "addressSecondLine": "Apt. 451",
+  "state": "Iowa",
+  "city": "Cassandraview",
+  "zipcode": "00269-6468",
+  "phoneNumber": "329.515.9028 x92820",
+  "cardNumber": "6767-8709-9725-9154-781",
+  "cvvCardNumber": "328",
+  "expirationMonth": "1",
+  "expirationYear": "2027"
 }
