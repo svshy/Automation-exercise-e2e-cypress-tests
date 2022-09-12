@@ -26,4 +26,22 @@ describe(`Products`, () => {
     SingleProductPage.getProductCondition().should("be.visible");
     SingleProductPage.getProductBrand().should("be.visible");
   });
+  it(`View category products`, () => {
+    const categories = ["WOMEN", "MEN", "KIDS"];
+    cy.visit("/");
+    cy.verifyTitle("Automation Exercise");
+    HomePage.getCategories().each((category, index) => {
+      cy.wrap(category)
+        .invoke("prop", "innerText")
+        .then((text) => {
+          cy.wrap(text).should("eq", `${categories[index]}`);
+        });
+    });
+    HomePage.getWomenCategory().click();
+    HomePage.getDressSubcategory().click();
+    ProductsPage.getCategoryTitle().should("contain", `Women - Dress Products`);
+    HomePage.getMenCategory().click();
+    HomePage.getTshirtsSubcategory().click();
+    ProductsPage.getCategoryTitle().should("contain", `Men - Tshirts Products`);
+  });
 });

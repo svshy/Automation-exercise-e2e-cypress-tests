@@ -38,6 +38,21 @@ class HomePage {
   getFooter() {
     return cy.get("#footer");
   }
+  getCategories() {
+    return cy.get(`#accordian a[data-parent="#accordian"]`);
+  }
+  getWomenCategory() {
+    return cy.get(`#accordian a[href="#Women"]`);
+  }
+  getDressSubcategory() {
+    return cy.get(`#Women a[href="/category_products/1"]`);
+  }
+  getMenCategory() {
+    return cy.get(`#accordian a[href="#Men"]`);
+  }
+  getTshirtsSubcategory() {
+    return cy.get(`#Men a[href="/category_products/3"]`);
+  }
 }
 
 export default new HomePage();

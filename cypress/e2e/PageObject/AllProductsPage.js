@@ -29,6 +29,9 @@ class AllProductsPage {
   getModalViewCartBtn() {
     return cy.get(`.modal-content a[href="/view_cart"]`);
   }
+  getCategoryTitle() {
+    return cy.get(`.features_items h2`);
+  }
 }
 
 export default new AllProductsPage();
