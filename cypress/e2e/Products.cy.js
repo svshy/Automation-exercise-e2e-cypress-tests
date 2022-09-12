@@ -44,4 +44,31 @@ describe(`Products`, () => {
     HomePage.getTshirtsSubcategory().click();
     ProductsPage.getCategoryTitle().should("contain", `Men - Tshirts Products`);
   });
+  it.only(`View & Cart Brand Products`, () => {
+    cy.visit("/");
+    cy.verifyTitle("Automation Exercise");
+    HomePage.getProductsLink().click();
+    ProductsPage.getBrandsProducts().should("be.visible");
+    ProductsPage.getBrandsProducts()
+      .find(`li`)
+      .should("have.length", 8)
+      .each((element) => {
+        cy.wrap(element)
+          .find(`a`)
+          .invoke(`text`)
+          .then((text) => {
+            cy.log(text);
+          });
+      });
+    ProductsPage.getMadameBrand().click();
+    ProductsPage.getCategoryTitle().should(
+      "contain",
+      `Brand - Madame Products`
+    );
+    ProductsPage.getBabyHugBrand().click();
+    ProductsPage.getCategoryTitle().should(
+      "contain",
+      `Brand - Babyhug Products`
+    );
+  });
 });

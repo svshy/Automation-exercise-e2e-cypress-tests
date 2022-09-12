@@ -32,6 +32,15 @@ class AllProductsPage {
   getCategoryTitle() {
     return cy.get(`.features_items h2`);
   }
+  getBrandsProducts() {
+    return cy.get(`.brands_products`);
+  }
+  getMadameBrand() {
+    return cy.get(`li a[href="/brand_products/Madame"]`);
+  }
+  getBabyHugBrand() {
+    return cy.get(`li a[href="/brand_products/Babyhug"]`);
+  }
 }
 
 export default new AllProductsPage();
