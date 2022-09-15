@@ -72,7 +72,7 @@ describe(`Products`, () => {
       `Brand - Babyhug Products`
     );
   });
-  it.only(`Search Products and Verify Cart After Login`, () => {
+  it(`Search Products and Verify Cart After Login`, () => {
     const searchProduct = "t-shirt";
     let products = [];
     cy.visit("/");
