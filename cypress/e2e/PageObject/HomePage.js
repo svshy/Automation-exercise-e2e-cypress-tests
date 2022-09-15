@@ -5,6 +5,9 @@ class HomePage {
   getLogoutLink() {
     return cy.get('a[href="/logout"]');
   }
+  getLoginLink() {
+    return cy.get('.navbar-nav a[href="/login"]');
+  }
 
   getContactLink() {
     return cy.get('a[href="/contact_us"]');

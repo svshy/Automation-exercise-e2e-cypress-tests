@@ -8,6 +8,9 @@ class AllProductsPage {
   getProductPrice() {
     return cy.get(".productinfo h2");
   }
+  getProductName() {
+    return cy.get(".productinfo p");
+  }
   getViewProductBtn() {
     return cy.get(".choose a");
   }
