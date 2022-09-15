@@ -13,6 +13,8 @@ import { faker } from "@faker-js/faker";
 import LoginPage from "../e2e/PageObject/LoginAndRegisterPage";
 import RegisterPage from "../e2e/PageObject/LoginAndRegisterPage";
 import AccountInfo from "../e2e/PageObject/AccountInfoPage";
+import CartPage from "../e2e/PageObject/CartPage";
+import HomePage from "../e2e/PageObject/HomePage";
 
 Cypress.Commands.add("generateRegisterFixture", () => {
   cy.writeFile("cypress/fixtures/registerData.json", {
@@ -44,6 +46,9 @@ Cypress.Commands.add("login", (email, password) => {
   LoginPage.getLoginPasswordInput().clear().type(password);
   //get login button and click
   LoginPage.getLoginBtn().click();
+});
+Cypress.Commands.add("verifyLogin", (username) => {
+  HomePage.getNavbarLinks().should(`contain`, `Logged in as ${username}`);
 });
 
 Cypress.Commands.add("registerUser", (registerData) => {
@@ -104,6 +109,18 @@ Cypress.Commands.add("generateEmail", () => {
 
 Cypress.Commands.add("verifyTitle", (title) => {
   cy.title().should("eq", title);
+});
+
+Cypress.Commands.add("compareProductsNameWithArray", (productsNameArray) => {
+  CartPage.getCartTable()
+    .find(".cart_description a")
+    .each((name, index) => {
+      cy.wrap(name)
+        .invoke("text")
+        .then((text) => {
+          cy.wrap(text).should("eq", `${productsNameArray[index]}`);
+        });
+    });
 });
 
 //

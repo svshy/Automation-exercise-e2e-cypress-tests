@@ -17,13 +17,8 @@ describe(`User Login`, () => {
   it(`User should log in and log out`, () => {
     //use json from fixtures to use correct credentials
     cy.fixture("correctLoginData").then((data) => {
-      //login function from commands.js
       cy.login(data.email, data.password);
-      //verify that "Logged in as ${this.loginData.username} is visible in the navigation bar"
-      HomePage.getNavbarLinks().should(
-        `contain`,
-        `Logged in as ${data.username}`
-      );
+      cy.verifyLogin(data.username);
     });
     HomePage.getLogoutLink().click();
     cy.url().should("equal", `${Cypress.config("baseUrl")}login`);
