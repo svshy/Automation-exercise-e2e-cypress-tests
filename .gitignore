@@ -2,3 +2,4 @@
 node_modules
 cypress/fixtures/registerData.json
 cypress/screenshots
+cypress/downloads/invoice.txt
