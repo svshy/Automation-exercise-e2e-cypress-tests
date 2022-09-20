@@ -40,14 +40,14 @@ describe(`Place Order`, () => {
     );
     HomePage.getCartLink().click();
     CartPage.getCheckoutBtn().click();
-    CheckoutPage.getFullName().contains(
+    CheckoutPage.getDeliveryFullName().contains(
       `${this.registerData.firstName} ${this.registerData.lastName}`
     );
-    CheckoutPage.getCompany().contains(`${this.registerData.company}`);
-    CheckoutPage.getFirstLineAddress().contains(
+    CheckoutPage.getDeliveryCompany().contains(`${this.registerData.company}`);
+    CheckoutPage.getDeliveryFirstLineAddress().contains(
       `${this.registerData.addressFirstLine}`
     );
-    CheckoutPage.getSecondLineAddress().contains(
+    CheckoutPage.getDeliverySecondLineAddress().contains(
       `${this.registerData.city} ${this.registerData.state} ${this.registerData.zipcode}`
     );
     CheckoutPage.getCommentInput()
@@ -277,14 +277,14 @@ describe(`Place Order: Login before Checkout`, () => {
     ProductsPage.getModalViewCartBtn().click();
     cy.verifyTitle("Automation Exercise - Checkout");
     CartPage.getCheckoutBtn().click();
-    CheckoutPage.getFullName().contains(
+    CheckoutPage.getDeliveryFullName().contains(
       `${this.loginData.firstName} ${this.loginData.lastName}`
     );
-    CheckoutPage.getCompany().contains(`${this.loginData.company}`);
-    CheckoutPage.getFirstLineAddress().contains(
+    CheckoutPage.getDeliveryCompany().contains(`${this.loginData.company}`);
+    CheckoutPage.getDeliveryFirstLineAddress().contains(
       `${this.loginData.addressFirstLine}`
     );
-    CheckoutPage.getSecondLineAddress().contains(
+    CheckoutPage.getDeliverySecondLineAddress().contains(
       `${this.loginData.city} ${this.loginData.state} ${this.loginData.zipcode}`
     );
     CheckoutPage.getCommentInput()
