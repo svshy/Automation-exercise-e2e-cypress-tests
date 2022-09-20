@@ -37,9 +37,20 @@ class HomePage {
   getFooter() {
     return cy.get("#footer");
   }
-
-  getFooter() {
-    return cy.get("#footer");
+  getRecommendedItems() {
+    return cy.get(".recommended_items");
+  }
+  getFirstRecommendedItem() {
+    return cy.get(".recommended_items .single-products").first();
+  }
+  getFirstRecommendedItemCartBtn() {
+    return cy.get(".recommended_items .add-to-cart").first();
+  }
+  getRecommendedItemsTitle() {
+    return cy.get(".recommended_items .title");
+  }
+  getModalViewCartBtn() {
+    return cy.get(`.modal-content a[href="/view_cart"]`);
   }
   getCategories() {
     return cy.get(`#accordian a[data-parent="#accordian"]`);

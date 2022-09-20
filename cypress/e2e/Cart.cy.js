@@ -91,4 +91,27 @@ describe(`Products Cart`, () => {
     CartPage.getCartTable().find(".cart_quantity_delete").click();
     CartPage.getEmptyCartMsg().should("contain", "Cart is empty!");
   });
+  it.only(`Add to cart from Recommended items`, () => {
+    let productName = "";
+    cy.visit(`/`);
+    cy.verifyTitle("Automation Exercise");
+    HomePage.getRecommendedItems().scrollIntoView();
+    HomePage.getRecommendedItemsTitle().should("contain", "recommended items");
+    HomePage.getFirstRecommendedItem()
+      .find("p")
+      .invoke("text")
+      .then((text) => {
+        productName = text;
+        console.log(productName);
+      });
+    HomePage.getFirstRecommendedItemCartBtn().click({ force: true });
+    HomePage.getModalViewCartBtn().click();
+    CartPage.getCartTable().find("tbody tr").should("have.length", 1);
+    CartPage.getCartTable()
+      .find(".cart_description a")
+      .invoke("text")
+      .then((text) => {
+        cy.wrap(text).should("contain", productName);
+      });
+  });
 });
