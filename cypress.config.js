@@ -1,4 +1,5 @@
 const { defineConfig } = require("cypress");
+const { isFileExist } = require("cy-verify-downloads");
 
 module.exports = defineConfig({
   e2e: {
@@ -9,6 +10,7 @@ module.exports = defineConfig({
     chromeWebSecurity: true,
     video: false,
     setupNodeEvents(on, config) {
+      on("task", { isFileExist });
       // implement node event listeners here
     },
   },
