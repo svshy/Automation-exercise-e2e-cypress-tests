@@ -99,14 +99,14 @@ describe(`Place Order`, () => {
     ProductsPage.getModalViewCartBtn().click();
     cy.verifyTitle("Automation Exercise - Checkout");
     CartPage.getCheckoutBtn().click();
-    CheckoutPage.getFullName().contains(
+    CheckoutPage.getDeliveryFullName().contains(
       `${this.registerData.firstName} ${this.registerData.lastName}`
     );
-    CheckoutPage.getCompany().contains(`${this.registerData.company}`);
-    CheckoutPage.getFirstLineAddress().contains(
+    CheckoutPage.getDeliveryCompany().contains(`${this.registerData.company}`);
+    CheckoutPage.getDeliveryFirstLineAddress().contains(
       `${this.registerData.addressFirstLine}`
     );
-    CheckoutPage.getSecondLineAddress().contains(
+    CheckoutPage.getDeliverySecondLineAddress().contains(
       `${this.registerData.city} ${this.registerData.state} ${this.registerData.zipcode}`
     );
     CheckoutPage.getCommentInput()
@@ -132,6 +132,44 @@ describe(`Place Order`, () => {
     );
     PaymentPage.getContinueBtn().click();
     cy.verifyTitle("Automation Exercise");
+  });
+  it(`Verify address details in checkout page`, function () {
+    cy.visit(`/login`);
+    cy.verifyTitle("Automation Exercise - Signup / Login");
+    RegisterPage.getRegisterForm()
+      .should(`contain`, `New User Signup!`)
+      .should(`be.visible`);
+    cy.registerUser(this.registerData);
+    AccountCreated.getAccountCreatedTitle()
+      .should("contain", `Account Created!`)
+      .should(`be.visible`);
+    AccountCreated.getContinueBtn().click();
+    HomePage.getNavbarLinks().should(
+      `contain`,
+      `Logged in as ${this.registerData.userName}`
+    );
+    HomePage.getProductsLink().click();
+    cy.verifyTitle("Automation Exercise - All Products");
+    ProductsPage.getProductsList()
+      .first()
+      .then(() => {
+        ProductsPage.getAddToCartBtn().first().click();
+      });
+    ProductsPage.getModalViewCartBtn().click();
+    cy.verifyTitle("Automation Exercise - Checkout");
+    CartPage.getCheckoutBtn().click();
+    CheckoutPage.getDeliveryFirstLineAddress().contains(
+      `${this.registerData.addressFirstLine}`
+    );
+    CheckoutPage.getDeliverySecondLineAddress().contains(
+      `${this.registerData.city} ${this.registerData.state} ${this.registerData.zipcode}`
+    );
+    CheckoutPage.getInvoiceFirstLineAddress().contains(
+      `${this.registerData.addressFirstLine}`
+    );
+    CheckoutPage.getInvoiceSecondLineAddress().contains(
+      `${this.registerData.city} ${this.registerData.state} ${this.registerData.zipcode}`
+    );
   });
 });
 

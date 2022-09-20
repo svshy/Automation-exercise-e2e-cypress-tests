@@ -1,14 +1,14 @@
 class CheckoutPage {
-  getFullName() {
+  getDeliveryFullName() {
     return cy.get(`#address_delivery .address_firstname`);
   }
-  getCompany() {
+  getDeliveryCompany() {
     return cy.get(`#address_delivery .address_address1`);
   }
-  getFirstLineAddress() {
+  getDeliveryFirstLineAddress() {
     return cy.get(`#address_delivery .address_address1`);
   }
-  getSecondLineAddress() {
+  getDeliverySecondLineAddress() {
     return cy.get(`#address_delivery .address_city`);
   }
   getCommentInput() {
@@ -16,6 +16,12 @@ class CheckoutPage {
   }
   getPlaceOrderBtn() {
     return cy.get(`.container .check_out`);
+  }
+  getInvoiceFirstLineAddress() {
+    return cy.get(`#address_invoice .address_address1`);
+  }
+  getInvoiceSecondLineAddress() {
+    return cy.get(`#address_invoice .address_city`);
   }
 }
 

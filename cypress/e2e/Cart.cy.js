@@ -91,7 +91,7 @@ describe(`Products Cart`, () => {
     CartPage.getCartTable().find(".cart_quantity_delete").click();
     CartPage.getEmptyCartMsg().should("contain", "Cart is empty!");
   });
-  it.only(`Add to cart from Recommended items`, () => {
+  it(`Add to cart from Recommended items`, () => {
     let productName = "";
     cy.visit(`/`);
     cy.verifyTitle("Automation Exercise");
