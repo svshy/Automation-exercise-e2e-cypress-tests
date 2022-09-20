@@ -23,6 +23,9 @@ class PaymentPage {
   getContinueBtn() {
     return cy.get(`[data-qa="continue-button"]`);
   }
+  getDownloadInvoiceBtn() {
+    return cy.get(`a.check_out`);
+  }
 }
 
 export default new PaymentPage();

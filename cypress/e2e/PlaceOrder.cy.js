@@ -171,6 +171,81 @@ describe(`Place Order`, () => {
       `${this.registerData.city} ${this.registerData.state} ${this.registerData.zipcode}`
     );
   });
+
+  it.only(`Download Invoice after purchase order`, function () {
+    cy.visit(`/`);
+    cy.verifyTitle("Automation Exercise");
+    HomePage.getProductsLink().click();
+    cy.verifyTitle("Automation Exercise - All Products");
+    ProductsPage.getProductsList()
+      .first()
+      .then(() => {
+        ProductsPage.getAddToCartBtn().first().click();
+      });
+    ProductsPage.getModalViewCartBtn().click();
+    cy.verifyTitle("Automation Exercise - Checkout");
+    CartPage.getCheckoutBtn().click();
+    CartPage.getModalCheckoutRegisterBtn().click();
+    cy.registerUser(this.registerData);
+    AccountCreated.getAccountCreatedTitle()
+      .should("contain", `Account Created!`)
+      .should(`be.visible`);
+    AccountCreated.getContinueBtn().click();
+    HomePage.getNavbarLinks().should(
+      `contain`,
+      `Logged in as ${this.registerData.userName}`
+    );
+    HomePage.getCartLink().click();
+    CartPage.getCheckoutBtn().click();
+    CheckoutPage.getDeliveryFullName().contains(
+      `${this.registerData.firstName} ${this.registerData.lastName}`
+    );
+    CheckoutPage.getDeliveryCompany().contains(`${this.registerData.company}`);
+    CheckoutPage.getDeliveryFirstLineAddress().contains(
+      `${this.registerData.addressFirstLine}`
+    );
+    CheckoutPage.getDeliverySecondLineAddress().contains(
+      `${this.registerData.city} ${this.registerData.state} ${this.registerData.zipcode}`
+    );
+    CheckoutPage.getCommentInput()
+      .clear()
+      .type(
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque quas quisquam, officiis sapiente voluptatem aut suscipit a optio sed dolores repellat hic autem dicta quia neque quidem ex quo deserunt."
+      );
+    CheckoutPage.getPlaceOrderBtn().click();
+    PaymentPage.getNameOnCard()
+      .clear()
+      .type(`${this.registerData.firstName} ${this.registerData.lastName}`);
+    PaymentPage.getCardNumber().clear().type(`${this.registerData.cardNumber}`);
+    PaymentPage.getCardCvc().clear().type(`${this.registerData.cvvCardNumber}`);
+    PaymentPage.getExpirationMonth()
+      .clear()
+      .type(`${this.registerData.expirationMonth}`);
+    PaymentPage.getExpirationYear()
+      .clear()
+      .type(`${this.registerData.expirationYear}`);
+    PaymentPage.getPayBtn().click();
+    PaymentPage.getSuccessMessage().contains(
+      `Congratulations! Your order has been confirmed!`
+    );
+    /**Cypress problem with page load timeout
+     *solution - https://github.com/cypress-io/cypress/issues/14857
+     *solution start here */
+    cy.window()
+      .document()
+      .then(function (doc) {
+        doc.addEventListener("click", () => {
+          setTimeout(function () {
+            doc.location.reload();
+          }, 5000);
+        });
+        PaymentPage.getDownloadInvoiceBtn().click();
+      });
+    //solution end
+    cy.verifyDownload("invoice.txt");
+    PaymentPage.getContinueBtn().click();
+    cy.verifyTitle("Automation Exercise");
+  });
 });
 
 //seperate "describe" to use a different beforeEach hook or not to use any. Alternative solution is to use Cypress.currentTest.title and switch in beforeEach hook
