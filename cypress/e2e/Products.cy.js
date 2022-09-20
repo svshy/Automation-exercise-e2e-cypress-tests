@@ -104,4 +104,27 @@ describe(`Products`, () => {
     HomePage.getCartLink().click();
     cy.compareProductsNameWithArray(products);
   });
+  it(`Add review on product`, () => {
+    const name = "Test Name";
+    const email = "test.mail@qwertytest.com";
+    const review = `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni ex atque laborum.`;
+    cy.visit("/");
+    cy.verifyTitle("Automation Exercise");
+    HomePage.getProductsLink().click();
+    cy.verifyTitle("Automation Exercise - All Products");
+    ProductsPage.getProductsList()
+      .first()
+      .then(() => {
+        ProductsPage.getViewProductBtn().first().click();
+      });
+    SingleProductPage.getReviewsTitle().should("be.visible");
+    SingleProductPage.getNameInputForReview().clear().type(name);
+    SingleProductPage.getEmailInputForReview().clear().type(email);
+    SingleProductPage.getReviewTextArea().clear().type(review);
+    SingleProductPage.getSubmitReviewBtn().click();
+    SingleProductPage.getConfirmReviewMsg().should(
+      "contain",
+      "Thank you for your review."
+    );
+  });
 });

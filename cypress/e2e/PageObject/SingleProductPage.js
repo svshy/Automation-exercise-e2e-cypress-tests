@@ -29,6 +29,24 @@ class SingleProductPage {
   getModalViewCartBtn() {
     return cy.get(`.modal-content a[href="/view_cart"]`);
   }
+  getReviewsTitle() {
+    return cy.get(`a[href="#reviews"]`);
+  }
+  getNameInputForReview() {
+    return cy.get(`#name`);
+  }
+  getEmailInputForReview() {
+    return cy.get(`#email`);
+  }
+  getReviewTextArea() {
+    return cy.get(`#review`);
+  }
+  getSubmitReviewBtn() {
+    return cy.get(`#button-review`);
+  }
+  getConfirmReviewMsg() {
+    return cy.get(`.alert-success span`);
+  }
 }
 
 export default new SingleProductPage();
