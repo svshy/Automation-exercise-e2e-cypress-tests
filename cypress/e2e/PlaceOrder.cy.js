@@ -172,7 +172,7 @@ describe(`Place Order`, () => {
     );
   });
 
-  it.only(`Download Invoice after purchase order`, function () {
+  it(`Download Invoice after purchase order`, function () {
     cy.visit(`/`);
     cy.verifyTitle("Automation Exercise");
     HomePage.getProductsLink().click();
