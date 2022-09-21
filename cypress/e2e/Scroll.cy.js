@@ -1,9 +1,6 @@
 /// <reference types="cypress"/>
 
 import HomePage from "./PageObject/HomePage";
-import ProductsPage from "./PageObject/AllProductsPage";
-import CartPage from "./PageObject/CartPage";
-import SingleProductPage from "./PageObject/SingleProductPage";
 
 describe(`Verify scroll on homepage`, () => {
   it(`Verify Scroll Up using 'Arrow' button and Scroll Down functionality`, () => {

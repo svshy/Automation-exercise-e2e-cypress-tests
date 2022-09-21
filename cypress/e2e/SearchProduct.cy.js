@@ -2,7 +2,6 @@
 
 import HomePage from "./PageObject/HomePage";
 import ProductsPage from "./PageObject/AllProductsPage";
-import SingleProductPage from "./PageObject/SingleProductPage";
 
 describe(`Search products`, () => {
   it(`Search and verify all the products related to search`, () => {

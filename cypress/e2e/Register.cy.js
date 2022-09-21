@@ -1,7 +1,6 @@
 /// <reference types="cypress"/>
 
 import RegisterPage from "./PageObject/LoginAndRegisterPage";
-import AccountInfo from "./PageObject/AccountInfoPage";
 import AccountCreated from "./PageObject/AccountCreatedPage";
 import HomePage from "./PageObject/HomePage";
 

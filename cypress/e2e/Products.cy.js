@@ -3,7 +3,6 @@
 import HomePage from "./PageObject/HomePage";
 import ProductsPage from "./PageObject/AllProductsPage";
 import SingleProductPage from "./PageObject/SingleProductPage";
-import CartPage from "./PageObject/CartPage";
 
 describe(`Products`, () => {
   it(`Verify all products page and first product details`, () => {
