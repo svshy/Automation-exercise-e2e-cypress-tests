@@ -67,6 +67,15 @@ class HomePage {
   getTshirtsSubcategory() {
     return cy.get(`#Men a[href="/category_products/3"]`);
   }
+  getSubscriptionTitle() {
+    return cy.get(`.single-widget h2`);
+  }
+  getScrollArrow() {
+    return cy.get(`#scrollUp`);
+  }
+  getSubtitleFromCarousel() {
+    return cy.get(`#slider-carousel .item.active h2`);
+  }
 }
 
 export default new HomePage();
