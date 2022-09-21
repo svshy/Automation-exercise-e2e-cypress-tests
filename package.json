@@ -14,6 +14,7 @@
     "@faker-js/faker": "^7.3.0",
     "cy-verify-downloads": "^0.1.10",
     "cypress": "^10.8.0",
-    "cypress-file-upload": "^5.0.8"
+    "cypress-file-upload": "^5.0.8",
+    "cypress-mochawesome-reporter": "^3.2.2"
   }
 }
