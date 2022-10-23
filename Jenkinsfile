@@ -11,6 +11,7 @@ pipeline{
         stage('Building'){
             steps{
             echo "Building the application"
+            set CYPRESS_RUN_BINARY=C:\Users\domin\AppData\Local\Cypress\Cache\10.10.0\Cypress\Cypress.exe
             }
         }
         stage('Testing'){
