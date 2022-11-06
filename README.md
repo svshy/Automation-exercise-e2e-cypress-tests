@@ -39,3 +39,13 @@ Cypress.Commands.add("generateRegisterFixture", () => {
   });
 });
 ```
+
+# Running tests on Jenkins and displaying a HTML report
+
+![pipelineStages](pipelineStages.png)
+
+![HTMLreport](HTMLreport.png)
+
+![pipelineStages](testsReport.png)
+
+HTML Report is updated after each test
