@@ -1,0 +1,124 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-11-30T06:22:45.761Z",
+    "end": "2022-11-30T06:23:28.562Z",
+    "duration": 42801,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c07a3bee-af29-4cf0-bcc6-f5844c62b4fe",
+      "title": "",
+      "fullFile": "cypress\\e2e\\Login.cy.js",
+      "file": "cypress\\e2e\\Login.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "967e1da4-ef7f-42e2-8f1a-5563317e579a",
+          "title": "User Login",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "User should log in and log out",
+              "fullTitle": "User Login User should log in and log out",
+              "timedOut": null,
+              "duration": 29393,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//use json from fixtures to use correct credentials\ncy.fixture(\"correctLoginData\").then(data => {\n  cy.login(data.email, data.password);\n  cy.verifyLogin(data.username);\n});\n_HomePage.default.getLogoutLink().click();\ncy.url().should(\"equal\", `${Cypress.config(\"baseUrl\")}login`);",
+              "err": {},
+              "uuid": "7d0c9814-c8ad-426e-a7e5-15913bebedc5",
+              "parentUUID": "967e1da4-ef7f-42e2-8f1a-5563317e579a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "User shouldn't log in",
+              "fullTitle": "User Login User shouldn't log in",
+              "timedOut": null,
+              "duration": 12624,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//use json from fixtures to use incorrect credentials\ncy.fixture(\"incorrectLoginData\").then(data => {\n  //login function from commands.js\n  cy.login(data.email, data.password); //verify that \"Your email or password is incorrect!\" is visible in the login form\n  _LoginAndRegisterPage.default.getLoginForm().should(\"contain\", \"Your email or password is incorrect!\").and(\"be.visible\");\n});",
+              "err": {},
+              "uuid": "6d00fe9c-7b27-4092-8c2d-18930e52962e",
+              "parentUUID": "967e1da4-ef7f-42e2-8f1a-5563317e579a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "7d0c9814-c8ad-426e-a7e5-15913bebedc5",
+            "6d00fe9c-7b27-4092-8c2d-18930e52962e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 42017,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress\\reports\\html\\.jsons"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

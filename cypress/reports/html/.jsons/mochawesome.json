@@ -1,0 +1,171 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 7,
+    "passes": 5,
+    "pending": 0,
+    "failures": 2,
+    "start": "2022-11-30T06:18:38.007Z",
+    "end": "2022-11-30T06:21:28.670Z",
+    "duration": 170663,
+    "testsRegistered": 4,
+    "passPercent": 125,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d2c00736-115b-4902-be55-75ad05b6ae12",
+      "title": "",
+      "fullFile": "cypress\\e2e\\Cart.cy.js",
+      "file": "cypress\\e2e\\Cart.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8a203ebb-fec4-4602-82cc-ffabeae06bb0",
+          "title": "Products Cart",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Add Products in Cart",
+              "fullTitle": "Products Cart Add Products in Cart",
+              "timedOut": null,
+              "duration": 64308,
+              "state": "failed",
+              "speed": "slow",
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "{\n  \"title\": \"cypress-mochawesome-reporter-screenshots\",\n  \"value\": [\n    [\n      {\n        \"title\": \"Failed screenshot\",\n        \"value\": \"\\\\Cart.cy.js\\\\Products Cart -- Add Products in Cart (failed).png\"\n      }\n    ]\n  ]\n}",
+              "code": "let productsPrices = [];\ncy.visit(\"/\");\n_HomePage.default.getProductsLink().click();\n_AllProductsPage.default.getProductsList().each((product, index) => {\n  if (index + 1 <= 2) {\n    cy.wrap(product).then(() => {\n      cy.wrap(product).find(`.productinfo h2`).invoke(\"text\").then(text => {\n        productsPrices.push(text);\n      });\n      _AllProductsPage.default.getOverlayAddToCartBtn(index + 1).click({\n        force: true\n      });\n      if (index + 1 !== 2) {\n        _AllProductsPage.default.getContinueShoppingBtn().click();\n      } else _AllProductsPage.default.getModalViewCartBtn().click();\n    });\n  } else return false;\n});\n_CartPage.default.getCartTable().find(\"tbody tr\").should(\"have.length\", 2).each((element, index) => {\n  cy.wrap(element).find(\".cart_price p\").should(\"contain\", productsPrices[index]);\n  cy.wrap(element).find(`.cart_quantity button`).should(\"contain\", \"1\");\n  cy.wrap(element).find(\".cart_total p\").should(\"contain\", productsPrices[index]);\n});",
+              "err": {
+                "message": "CypressError: Timed out after waiting `60000ms` for your remote page to load.\n\nYour page did not fire its `load` event within `60000ms`.\n\nYou can try increasing the `pageLoadTimeout` value in `cypress.config.js` to wait longer.\n\nBrowsers will not fire the `load` event until all stylesheets and scripts are done downloading.\n\nWhen this `load` event occurs, Cypress will continue running commands.",
+                "estack": "CypressError: Timed out after waiting `60000ms` for your remote page to load.\n\nYour page did not fire its `load` event within `60000ms`.\n\nYou can try increasing the `pageLoadTimeout` value in `cypress.config.js` to wait longer.\n\nBrowsers will not fire the `load` event until all stylesheets and scripts are done downloading.\n\nWhen this `load` event occurs, Cypress will continue running commands.\n    at timedOutWaitingForPageLoad (https://www.automationexercise.com/__cypress/runner/cypress_runner.js:141258:72)\n    at <unknown> (https://www.automationexercise.com/__cypress/runner/cypress_runner.js:142456:16)\n    at tryCatcher (https://www.automationexercise.com/__cypress/runner/cypress_runner.js:11327:23)\n    at <unknown> (https://www.automationexercise.com/__cypress/runner/cypress_runner.js:6449:41)\n    at tryCatcher (https://www.automationexercise.com/__cypress/runner/cypress_runner.js:11327:23)\n    at Promise._settlePromiseFromHandler (https://www.automationexercise.com/__cypress/runner/cypress_runner.js:9262:31)\n    at Promise._settlePromise (https://www.automationexercise.com/__cypress/runner/cypress_runner.js:9319:18)\n    at Promise._settlePromise0 (https://www.automationexercise.com/__cypress/runner/cypress_runner.js:9364:10)\n    at Promise._settlePromises (https://www.automationexercise.com/__cypress/runner/cypress_runner.js:9440:18)\n    at _drainQueueStep (https://www.automationexercise.com/__cypress/runner/cypress_runner.js:6034:12)\n    at _drainQueue (https://www.automationexercise.com/__cypress/runner/cypress_runner.js:6027:9)\n    at ../../node_modules/bluebird/js/release/async.js.Async._drainQueues (https://www.automationexercise.com/__cypress/runner/cypress_runner.js:6043:5)\n    at Async.drainQueues (https://www.automationexercise.com/__cypress/runner/cypress_runner.js:5913:14)\nFrom Your Spec Code:\n    at Context.eval (webpack:///./cypress/e2e/Cart.cy.js:11:7)",
+                "diff": null
+              },
+              "uuid": "065d4487-1e9c-48d5-8786-e26ad67b118d",
+              "parentUUID": "8a203ebb-fec4-4602-82cc-ffabeae06bb0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Add Product in Cart and verify quantity equal to 4",
+              "fullTitle": "Products Cart Add Product in Cart and verify quantity equal to 4",
+              "timedOut": null,
+              "duration": 61063,
+              "state": "failed",
+              "speed": "slow",
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "{\n  \"title\": \"cypress-mochawesome-reporter-screenshots\",\n  \"value\": [\n    [\n      {\n        \"title\": \"Failed screenshot\",\n        \"value\": \"\\\\Cart.cy.js\\\\Products Cart -- Add Product in Cart and verify quantity equal to 4 (failed).png\"\n      }\n    ]\n  ]\n}",
+              "code": "let product = \"\";\nconst quantity = 4;\ncy.visit(\"/\");\n_HomePage.default.getProductsLink().click();\n_AllProductsPage.default.getProductsList().first().then(() => {\n  _AllProductsPage.default.getViewProductBtn().first().click();\n});\n_SingleProductPage.default.getProductInformation().should(\"be.visible\");\n_SingleProductPage.default.getProductName().invoke(\"text\").then(text => {\n  product = text;\n});\n_SingleProductPage.default.getProductQuantity().clear().type(quantity);\n_SingleProductPage.default.getAddToCartBtn().click();\n_SingleProductPage.default.getModalViewCartBtn().click();\n_CartPage.default.getCartTable().find(\"tbody tr\").should(\"have.length\", 1);\n_CartPage.default.getCartTable().find(\".cart_description a\").invoke(\"text\").then(text => {\n  cy.wrap(text).should(\"contain\", product);\n});\n_CartPage.default.getCartTable().find(\".cart_quantity button\").invoke(\"text\").then(text => {\n  cy.wrap(text).should(\"contain\", quantity);\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: expected '8' to include 4",
+                "estack": "AssertionError: Timed out retrying after 4000ms: expected '8' to include 4\n    at Context.eval (webpack:///./cypress/e2e/Cart.cy.js:75:22)",
+                "diff": null
+              },
+              "uuid": "bfe56aba-abc4-43ed-9aed-26c20979d1b0",
+              "parentUUID": "8a203ebb-fec4-4602-82cc-ffabeae06bb0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Remove all products From Cart",
+              "fullTitle": "Products Cart Remove all products From Cart",
+              "timedOut": null,
+              "duration": 36512,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(`/`);\ncy.verifyTitle(\"Automation Exercise\");\n_HomePage.default.getProductsLink().click();\ncy.verifyTitle(\"Automation Exercise - All Products\");\n_AllProductsPage.default.getProductsList().first().then(() => {\n  _AllProductsPage.default.getAddToCartBtn().first().click();\n});\n_AllProductsPage.default.getModalViewCartBtn().click();\ncy.verifyTitle(\"Automation Exercise - Checkout\");\n_CartPage.default.getCartTable().find(\"tbody tr\").should(\"have.length\", 1);\n_CartPage.default.getCartTable().find(\".cart_quantity_delete\").click();\n_CartPage.default.getEmptyCartMsg().should(\"contain\", \"Cart is empty!\");",
+              "err": {},
+              "uuid": "2ae80d3a-6e28-473b-a412-981ee5893509",
+              "parentUUID": "8a203ebb-fec4-4602-82cc-ffabeae06bb0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Add to cart from Recommended items",
+              "fullTitle": "Products Cart Add to cart from Recommended items",
+              "timedOut": null,
+              "duration": 19720,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let productName = \"\";\ncy.visit(`/`);\ncy.verifyTitle(\"Automation Exercise\");\n_HomePage.default.getRecommendedItems().scrollIntoView();\n_HomePage.default.getRecommendedItemsTitle().should(\"contain\", \"recommended items\");\n_HomePage.default.getFirstRecommendedItem().find(\"p\").invoke(\"text\").then(text => {\n  productName = text;\n  console.log(productName);\n});\n_HomePage.default.getFirstRecommendedItemCartBtn().click({\n  force: true\n});\n_HomePage.default.getModalViewCartBtn().click();\n_CartPage.default.getCartTable().find(\"tbody tr\").should(\"have.length\", 1);\n_CartPage.default.getCartTable().find(\".cart_description a\").invoke(\"text\").then(text => {\n  cy.wrap(text).should(\"contain\", productName);\n});",
+              "err": {},
+              "uuid": "7d3e009e-671c-4f81-afa0-0736a8df8066",
+              "parentUUID": "8a203ebb-fec4-4602-82cc-ffabeae06bb0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2ae80d3a-6e28-473b-a412-981ee5893509",
+            "7d3e009e-671c-4f81-afa0-0736a8df8066"
+          ],
+          "failures": [
+            "065d4487-1e9c-48d5-8786-e26ad67b118d",
+            "bfe56aba-abc4-43ed-9aed-26c20979d1b0"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 181603,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress\\reports\\html\\.jsons"
+      },
+      "version": "6.2.0"
+    }
+  }
+}
