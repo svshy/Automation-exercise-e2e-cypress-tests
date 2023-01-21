@@ -4,17 +4,15 @@
   "description": "Cypress Test",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "triggerAllTests-headless": "npx cypress run"
   },
   "author": "Dominik",
   "license": "ISC",
   "devDependencies": {
-    "@faker-js/faker": "^7.3.0",
-    "cy-verify-downloads": "^0.1.10",
+    "@faker-js/faker": "^7.6.0",
+    "cy-verify-downloads": "^0.1.11",
     "cypress": "^12.3.0",
     "cypress-file-upload": "^5.0.8",
-    "cypress-mochawesome-reporter": "^3.2.2"
+    "cypress-mochawesome-reporter": "^3.2.3"
   }
 }
